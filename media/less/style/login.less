@@ -12,6 +12,7 @@
     .flex-display;
     .align-items(center);
     .justify-content(center);
+
     &:before {
         background-image: url('../img/photo-overlay.png');
         .size(100%);
@@ -38,13 +39,32 @@
 .lcb-login-logo {
     font-family: Pacifico;
     font-size: 85px;
-    text-shadow: 0 0 10px rgba(0,0,0,.2);
+    text-shadow: 0 0 10px rgba(0, 0, 0, .2);
     color: #fff;
     margin: 0;
     margin-bottom: 30px;
+
     .flavour {
         color: #f22472;
     }
+
+    @media (max-width: @screen-xs-max) {
+        font-size: 56px;
+    }
+}
+
+.lcb-login-logo-subtitle {
+    font-family: Pacifico;
+    font-size: 40px;
+    text-shadow: 0 0 10px rgba(0, 0, 0, .2);
+    color: #fff;
+    margin: 0;
+    margin-bottom: 30px;
+
+    .flavour {
+        color: #f22472;
+    }
+
     @media (max-width: @screen-xs-max) {
         font-size: 56px;
     }
@@ -57,7 +77,8 @@
     position: relative;
     z-index: 1;
     border-radius: 3px;
-    .box-shadow(0 0 20px 3px rgba(0,0,0,.1));
+    .box-shadow(0 0 20px 3px rgba(0, 0, 0, .1));
+
     .response:empty {
         display: none;
     }
@@ -67,6 +88,7 @@
             .col-sm-9:first-child {
                 padding-right: 10px;
             }
+
             .col-sm-9:last-child {
                 padding-left: 10px;
             }
@@ -92,6 +114,7 @@
     margin-bottom: 25px;
     border-radius: 100%;
     border: 1px #eee solid;
+
     &.show {
         .size(100px);
         .animated;
@@ -101,6 +124,7 @@
 
 .lcb-login-box-bottom {
     overflow: hidden;
+
     .links {
         margin-top: 12px;
         margin-right: 12px;
@@ -116,7 +140,7 @@
 }
 
 .lcb-login-footer {
-    background-color: rgba(0,0,0,.4);
+    background-color: rgba(0, 0, 0, .4);
     width: 100%;
     color: #f2f2f2;
     font-family: Tahoma;
@@ -126,18 +150,23 @@
     left: 0;
     bottom: 0;
     padding: 5px 0;
+
     p {
         margin: 0 10px;
     }
+
     a {
         color: #fff;
     }
+
     .fa {
         margin-right: 3px;
     }
+
     .fa-heart {
         color: #f22472;
     }
+
     @media (max-width: @screen-xs-max) {
         position: relative;
         font-size: 14px;
@@ -148,10 +177,25 @@
             margin: 10px 0;
             float: none;
         }
+
         .dash {
             line-height: 0;
             visibility: hidden;
             display: block;
         }
     }
+
+
+}
+
+.logo-image {
+    margin-top: 25px
+}
+
+#pA1, #pA {
+    background-color: #ffd8c4;
+}
+
+#pA12, #pA {
+    background-color: #ffd8c4;
 }

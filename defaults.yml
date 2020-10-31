@@ -75,3 +75,7 @@ rooms:
 
 i18n:
   locale: en
+
+typingdna:
+  apiKey: apiKeyHere
+  secret: secretHere
