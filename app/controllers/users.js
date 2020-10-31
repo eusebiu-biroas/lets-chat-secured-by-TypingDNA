@@ -11,12 +11,18 @@ module.exports = function() {
         middlewares = this.middlewares,
         models = this.models,
         User = models.user;
+    var typingDnaClient = global.typingDnaClient;
+
 
     //
     // Routes
     //
     app.get('/users', middlewares.requireLogin, function(req) {
         req.io.route('users:list');
+    });
+
+    app.get('/verify/:username/:pattern', middlewares.requireLogin, function (req) {
+        req.io.route('users:verify');
     });
 
     app.get('/users/:id', middlewares.requireLogin, function(req) {
@@ -29,9 +35,9 @@ module.exports = function() {
     app.io.route('users', {
         list: function(req, res) {
             var options = {
-                    skip: req.param('skip'),
-                    take: req.param('take')
-                };
+                skip: req.param('skip'),
+                take: req.param('take')
+            };
 
             core.users.list(options, function(err, users) {
                 if (err) {
@@ -41,6 +47,13 @@ module.exports = function() {
 
                 res.json(users);
             });
+        },
+        verify: function (req, res) {
+            var username = req.param('username') + '-letschat'
+            typingDnaClient.verify(username, req.param('pattern'), req.body.quality || 1, function (error, result) {
+                console.log(result);
+                res.json(result);
+            })
         },
         get: function(req, res) {
             var identifier = req.param('id');

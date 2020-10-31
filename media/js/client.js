@@ -14,6 +14,7 @@
         this.users = new UsersCollection();
         this.rooms = new RoomsCollection();
         this.events = _.extend({}, Backbone.Events);
+        this.tdnaVerify = {};
         return this;
     };
     //
@@ -49,8 +50,8 @@
         this.socket.emit('rooms:create', room, function(room) {
             if (room && room.errors) {
                 swal("Unable to create room",
-                     "Room slugs can only contain lower case letters, numbers or underscores!",
-                     "error");
+                    "Room slugs can only contain lower case letters, numbers or underscores!",
+                    "error");
             } else if (room && room.id) {
                 that.addRoom(room);
                 that.switchRoom(room.id);
@@ -120,8 +121,8 @@
         this.socket.emit('rooms:archive', options, function(data) {
             if (data !== 'No Content') {
                 swal('Unable to Archive!',
-                     'Unable to archive this room!',
-                     'error');
+                    'Unable to archive this room!',
+                    'error');
             }
         });
     };
@@ -237,7 +238,7 @@
 
             var orooms = that.user.get('openRooms');
             if ( ! _.contains(orooms,id)) {
-              orooms.push(id);
+                orooms.push(id);
             }
             that.socket.emit('account:profile', {'openRooms': orooms });
 
@@ -386,6 +387,18 @@
         $.ajax({url:'./users', async: false, success: success});
 
         return this.users;
+    };
+
+    Client.prototype.Verify = function (username, pattern) {
+        var that = this;
+
+        function success(response) {
+            that.tdnaVerify = response;
+        }
+
+        $.ajax({url: './verify/' + username + '/' + pattern, async: false, success: success});
+
+        return this.tdnaVerify;
     };
     //
     // Extras
