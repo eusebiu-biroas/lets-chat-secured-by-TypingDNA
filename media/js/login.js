@@ -4,10 +4,22 @@
 
     function onSubmit(form, callbacks) {
         var $form = $(form);
+        let data = $form.serialize();
+
+        if (!tdna.patternValid) {
+            swal('Woops',
+                'Please complete the writing pattern',
+                'warning');
+            return;
+        }
+
+        data += '&pattern1=' + tdna.pattern1;
+        data += '&pattern2=' + tdna.pattern2;
+
         $.ajax({
             type: 'POST',
             url: $form.attr('action'),
-            data: $form.serialize(),
+            data: data,
             dataType: 'json',
             complete: getLoginCallback($form)
         });
