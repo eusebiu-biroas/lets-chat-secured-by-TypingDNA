@@ -27,6 +27,12 @@ var _ = require('lodash'),
     auth = require('./app/auth/index'),
     core = require('./app/core/index');
 
+var TypingDnaClient = require('typingdnaclient');
+global.typingDnaClient = new TypingDnaClient(
+    settings.typingdna.apiKey,
+    settings.typingdna.secret,
+    '');
+
 var MongoStore = connectMongo(express.session),
     httpEnabled = settings.http && settings.http.enable,
     httpsEnabled = settings.https && settings.https.enable,
@@ -39,7 +45,7 @@ var MongoStore = connectMongo(express.session),
 // express.oi Setup
 //
 if (httpsEnabled) {
-     app = express().https({
+    app = express().https({
         key: fs.readFileSync(settings.https.key),
         cert: fs.readFileSync(settings.https.cert),
         passphrase: settings.https.passphrase
@@ -137,8 +143,8 @@ function wrapBundler(func) {
     // Making them relative, and not absolute
     return function() {
         return func.apply(func, arguments)
-                   .replace(/href="\//g, 'href="./')
-                   .replace(/src="\//g, 'src="./');
+            .replace(/href="\//g, 'href="./')
+            .replace(/src="\//g, 'src="./');
     };
 }
 
@@ -198,10 +204,10 @@ mongoose.connection.on('disconnected', function() {
 
 function startApp() {
     var port = httpsEnabled && settings.https.port ||
-               httpEnabled && settings.http.port;
+        httpEnabled && settings.http.port;
 
     var host = httpsEnabled && settings.https.host ||
-               httpEnabled && settings.http.host || '0.0.0.0';
+        httpEnabled && settings.http.host || '0.0.0.0';
 
 
 

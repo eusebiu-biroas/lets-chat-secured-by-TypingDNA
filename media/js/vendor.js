@@ -17,3 +17,5 @@
 //= require vendor/at/jquery.atwho.js
 //= require vendor/backbone.keys/backbone.keys.js
 //= require common.js
+//= require vendor/typingdna/typingdna.js
+//= require vendor/typingdna/helper.js

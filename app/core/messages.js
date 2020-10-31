@@ -40,8 +40,8 @@ MessageManager.prototype.create = function(options, cb) {
             // Touch Room's lastActive
             room.lastActive = message.posted;
             room.save();
-            // Temporary workaround for _id until populate can do aliasing
-            User.findOne(message.owner, function(err, user) {
+
+            User.findOne({'_id': message.owner}, function(err, user) {
                 if (err) {
                     console.error(err);
                     return cb(err);
